@@ -3,18 +3,19 @@ from django.db import models
 # from account.models import Account
 
 class Main_category(models.Model):
-    name                 = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    
     class Meta:
         db_table ='main_categories'
 
 class Category(models.Model):
-    name                 = models.CharField(max_length=50)
-    main_category        = models.ForeignKey(Main_category, on_delete = models.CASCADE)
+    name = models.CharField(max_length=50)
+    main_category = models.ForeignKey(Main_category, on_delete = models.CASCADE)
+    
     class Meta:
         db_table = 'categories'
 
 class Product(models.Model):
- 
     product_banner       = models.CharField(max_length=1000, null=True)
     product_teaser       = models.CharField(max_length=1000, null=True)
     product_key_feature  = models.CharField(max_length=1000, null=True)
@@ -25,22 +26,22 @@ class Product(models.Model):
     additional_feature   = models.CharField(max_length=1000, null=True)
     color_model          = models.CharField(max_length=50, null=True)
     specs_details        = models.CharField(max_length=1000)
-    recommended_products = models.CharField(max_length=30, null=True )
+    recommended_products = models.CharField(max_length=30, null=True)
     category             = models.ForeignKey(Category, on_delete = models.CASCADE)
-    thumnail_url         = models.URLField(max_length  = 100)
-    color_model          = models.CharField(max_length=100, null=True)
-
+    
     class Meta:
         db_table = 'products'
 
-class Thumnail(models.Model):
-    thumnail_url         = models.ForeignKey(Product, on_delete = models.CASCADE)
+class Thumbnail(models.Model):
+    thumbnail_url         = models.CharField(max_length=50, null=True)
+    product              = models.ForeignKey(Product, on_delete=models.CASCADE)
+    
     class Meta:
-        db_table = 'thumnails'
+        db_table = 'thumbnails'
 
-class Order_Product(models.Model):
-    # order               = models.ForeignKey(Order, on_delete = models.CASCADE)
-    product             = models.ForeignKey(Product, on_delete = models.CASCADE)
-    count               = models.IntegerField(default=0)
-    class Meta:
-        db_table = 'order_products'
+# class Order_Product(models.Model):
+#     # order               = models.ForeignKey(Order, on_delete = models.CASCADE)
+#     product             = models.ForeignKey(Product, on_delete = models.CASCADE)
+#     count               = models.IntegerField(default=0)
+#     class Meta:
+#         db_table = 'order_products'
