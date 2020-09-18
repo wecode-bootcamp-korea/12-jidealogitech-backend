@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Account(models.Model):
     name           =   models.CharField(max_length=50)
     email          =   models.EmailField(max_length=50)
@@ -14,11 +13,3 @@ class Account(models.Model):
    
     class Meta:
         db_table = 'accounts'
-
-class Cart(models.Model):
-    #product       =  models.ForeignKey(Account, on_delete=models.CASCADE,null=True)
-    #user          =  models.ForeignKey(Account, on_delete=models.CASCADE,null=True)
-    count         =  models.CharField(max_length=20,null=True)  
-
-    class Meta:
-        db_table = 'carts'
