@@ -7,21 +7,37 @@ from django.http  import JsonResponse, HttpResponse
 
 from account.models import Account
 from django.db import IntegrityError
+# from django.core.exceptions import ObjectDoesNotExist
+
+# from logitech.settings import SECRET_KEY
+
+# def login_decorator(func):
+#     def wrapper(self,request,*args,**kwargs):
+#         try:
+#             access_token = request.headers.get('Authorization', None)
+#             payload      = jwt.decode(access_token, SECRET_KEY, algorithm= 'HS256')
+#             user         = Account.objects.get(email = payload['email'])
+#             request.user = user
+
+#         except jwt.exceptions.DecodeError:
+#             return JsonResponse({'message': 'INVALID_TOKEN'}, status=400)
+
+#         except Account.DoesNotExist:
+#             return JsonResponse({'message':'INVALID_USER'},status=400)
+
+#         return func(self,request,*args,**kwargs)
+#     return wrapper
 
 class  SignUpView(View):
     def post(self, request):
         data = json.loads(request.body)
         try:
-            if '@' not in data['email']:
+            if '@' not in data['email'] or len(data['email']) < 3:
                 return JsonResponse(
 					{"message":"Email_Not_Verified"},
-					status = 404
+					status = 400
                 )
-            elif len(data['email']) < 3:
-                return JsonResponse(
-                    {"message":"Email_length_short"}
-                )
-          
+           
             elif len(data['password']) < 5:
                 return JsonResponse(
 					{"message":"Password_Not_Verified"},
@@ -34,11 +50,7 @@ class  SignUpView(View):
             Account(
                 email    = data['email'],
                 password = hashed_password,
-                # name     = data['name'],
-                # language = data['language'],
-                # country  = data['country'],
-                # birthday = data['birthday'],
-                # phone    = data['phone'],
+                name     = data['name'],
             ).save()
             return JsonResponse({"message":"SUCCESS"}, status =200)
             
@@ -49,23 +61,16 @@ class  SignUpView(View):
 				)    
         except KeyError:
             return JsonResponse({'message':"INVALID_KEYS"},status=400) 
-
-    # def get(self, request):
-    #     account = Account.objects.values()
-    #     return JsonResponse({"data":list(account)}, stauts = 200) 
+            
 
 class SignInView(View):
     def post(self, request):
         data = json.loads(request.body)
         try:
-            if '@' not in data['email']:
+            if '@' not in data['email'] or len(data['email']) < 3:
                 return JsonResponse(
 					{"message":"Email_Not_Verified"},
-					status = 404
-                )
-            elif len(data['email']) < 3:
-                return JsonResponse(
-                    {"message":"Email_length_short"}
+					status = 400
                 )
           
             elif len(data['password']) < 5:

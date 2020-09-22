@@ -11,7 +11,7 @@ class Account(models.Model):
     phone          =   models.CharField(max_length=20)
     create_at      =   models.DateTimeField(auto_now_add=True,null=True)
     update_at      =   models.DateTimeField(auto_now_add=True,null=True)
-   
+
     class Meta:
         db_table = 'accounts'
 
