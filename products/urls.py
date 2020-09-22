@@ -1,11 +1,10 @@
 from django.urls import path, include
 
 
-from products.views import ProductListView # ProductDetailView
+from products.views import CategoryView, ProductListView, ProductDetailView
 
 urlpatterns = [
-    path('/micelist', ProductListView.as_view()),
-    # path("/detail-product",ProductDetailView.as_view()),
+    path('',CategoryView.as_view()),
+    path('/mice_list', ProductListView.as_view()),
+    path('/product_mice/<int:product_id>',ProductDetailView.as_view()),
 ]
-
-#localhost:8000/products/micelist

@@ -27,13 +27,14 @@ class Product(models.Model):
     specs_details        = models.TextField(null=True)
     recommended_products = models.CharField(max_length=30, null=True)
     category             = models.ForeignKey(Category, on_delete = models.CASCADE)
-    
+
     class Meta:
         db_table = 'products'
 
 class Color(models.Model):
-    color                = models.CharField(max_length=50, null=True)      
-     
+    color                = models.CharField(max_length=50, null=True)
+    image_url            = 
+
     class Meta:
         db_table = 'colors'
 
