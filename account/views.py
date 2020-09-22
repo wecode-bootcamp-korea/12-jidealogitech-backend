@@ -7,6 +7,7 @@ from django.http  import JsonResponse, HttpResponse
 
 from account.models import Account
 from django.db import IntegrityError
+from my_settings import SECRET, ALGORITHM
 # from django.core.exceptions import ObjectDoesNotExist
 
 # from logitech.settings import SECRET_KEY
@@ -82,7 +83,7 @@ class SignInView(View):
                 account = Account.objects.get(email = data['email'])
                 
                 if bcrypt.checkpw(data['password'].encode('utf-8'), account.password.encode('utf-8')):
-                    access_token = jwt.encode({'email' : account.email}, 'secret', algorithm = 'HS256')
+                    access_token = jwt.encode({'email' : account.email}, SECRET, algorithm = ALGORITHM)
                     return JsonResponse({"Authorization" : access_token.decode('utf-8')}, status=200)
                 return JsonResponse ({"message":"UNAUTHORIZED"},status=401) # password 에러
             return JsonResponse ({"message":"UNAUTHORIZED"},status=401)  # email 에러
