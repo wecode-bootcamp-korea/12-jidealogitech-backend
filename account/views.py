@@ -9,6 +9,7 @@ from account.models import Account
 from django.db import IntegrityError
 from my_settings import SECRET, ALGORITHM
 
+
 class  SignUpView(View):
     def post(self, request):
         data = json.loads(request.body)
