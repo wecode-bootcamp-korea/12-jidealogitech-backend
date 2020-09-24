@@ -13,17 +13,13 @@ class CategoryView(View):
             target_categories = Category.objects.all()
             main_categories = Main_category.objects.get(id=2)
            
-            subcategory = []
-            for category in target_categories: 
-           
-                subcategory.append(
+            subcategory = [
                     {
-                      
                       'id'   : category.id,
                       'category' : category.name,
                       'main_category': main_categories.name
                     }
-                )
+                for category in target_categories]
            
             return JsonResponse({"category_list":subcategory}, status = 200)    
 
@@ -45,16 +41,16 @@ class ProductListView(View):
             else:
                 specified_products = Product.objects.all()  
             
-            product_list =[]
-            for specified_product in specified_products:
-                product_list.append(
-                    {
-                       'product_title'   : specified_product.product_title,
-                       'product_details' : specified_product.product_details,
-                       'product_price'   : specified_product.product_price, 
-                       'thumbnail_url'   : specified_product.thumbnail_set.first().thumbnail_url            
-                     }
-                )
+            product_list = [
+                {
+                    'id'              : specified_product.id, 
+                    'product_title'   : specified_product.product_title,
+                    'product_details' : specified_product.product_details,
+                    'product_price'   : specified_product.product_price, 
+                    'thumbnail_url'   : specified_product.thumbnail_set.first().thumbnail_url            
+                    }
+                for specified_product in specified_products]
+        
             return JsonResponse({"mice_list":product_list}, status = 200) 
 
         except ValueError:
