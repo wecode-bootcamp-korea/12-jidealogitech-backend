@@ -1,5 +1,4 @@
 from django.db import models
-# from order.models import Order 
 # from account.models import Account
 
 class Main_category(models.Model):
@@ -27,20 +26,22 @@ class Product(models.Model):
     specs_details        = models.TextField(null=True)
     recommended_products = models.CharField(max_length=30, null=True)
     category             = models.ForeignKey(Category, on_delete = models.CASCADE)
+    color 		         = models.ManyToManyField('Color', through='Thumbnail', through_fields=('product','color'))
 
     class Meta:
         db_table = 'products'
 
 class Color(models.Model):
     color                = models.CharField(max_length=50, null=True)
-    image_url            = 
+    image_url            = models.CharField(max_length=3000,null=True)
 
     class Meta:
         db_table = 'colors'
 
+
 class Thumbnail(models.Model):
     thumbnail_url        = models.CharField(max_length=500, null=True)
-    product_title        = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product              = models.ForeignKey(Product, on_delete=models.CASCADE)
     color                = models.ForeignKey(Color, on_delete=models.CASCADE, null=True)
     
     class Meta:
