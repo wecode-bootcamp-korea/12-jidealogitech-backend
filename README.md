@@ -43,6 +43,7 @@
 
  - Back-end
    - 구동현님
+      - Initial setting
       - Modeling
       - Account : models.py
       - Account : views.py (SignupView, SigninView)
