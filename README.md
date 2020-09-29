@@ -62,5 +62,5 @@
   - [홍예찬님](https://velog.io/@hayyim0626/1%EC%B0%A8-%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0Logitech-Clone)
 
 - Back-end
-  - 구동현님
+  - [구동현님](https://velog.io/@goohyun1990/Logitech1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9B%84%EA%B8%B0)
   - [홍성은님](https://velog.io/@devjakeh/Retrospective1%EC%B0%A8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%A5%BC-%EB%A7%88%EC%B9%98%EB%A9%B0)
